@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Amplificadores y Cables</title>
+    <!-- Carga de Tailwind CSS para estilos responsivos y modernos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Fuente Inter para un aspecto moderno y legible */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Fondo gris claro */
+        }
+        /* Estilos para las celdas de la tabla */
+        th, td {
+            padding: 1rem; /* Espaciado interno */
+            text-align: left; /* Alineación del texto a la izquierda */
+            border-bottom: 1px solid #e5e7eb; /* Borde inferior suave */
+        }
+        th {
+            background-color: #ffffff; /* Fondo blanco para encabezados */
+            font-weight: 600; /* Seminegrita */
+            color: #b91c1c; /* Rojo oscuro para el texto (red-700 de Tailwind) */
+        }
+        /* Estilo para las imágenes dentro de la tabla */
+        .table-img {
+            width: 100px; /* Ancho fijo para las miniaturas */
+            height: auto;
+            border-radius: 0.375rem; /* Bordes ligeramente redondeados */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Sombra suave */
+            cursor: pointer; /* Indica que la imagen es clicable */
+            transition: transform 0.2s ease-in-out; /* Transición suave al hacer hover */
+        }
+        .table-img:hover {
+            transform: scale(1.05); /* Ligeramente más grande al pasar el ratón */
+        }
+        /* Estilos responsivos para la tabla */
+        .responsive-table {
+            width: 100%;
+            border-collapse: collapse; /* Elimina el espacio entre celdas */
+        }
+        @media (max-width: 768px) {
+            .responsive-table thead {
+                display: none; /* Oculta los encabezados de la tabla en móviles */
+            }
+            .responsive-table, .responsive-table tbody, .responsive-table tr, .responsive-table td {
+                display: block; /* Hace que las filas y celdas se comporten como bloques */
+                width: 100%;
+            }
+            .responsive-table tr {
+                margin-bottom: 1rem; /* Espacio entre filas en móviles */
+                border: 1px solid #e5e7eb;
+                border-radius: 0.5rem;
+                background-color: #ffffff;
+            }
+            .responsive-table td {
+                text-align: right; /* Alinea el contenido a la derecha */
+                padding-left: 50%; /* Espacio para la etiqueta */
+                position: relative;
+            }
+            .responsive-table td::before {
+                content: attr(data-label); /* Muestra la etiqueta de la columna */
+                position: absolute;
+                left: 1rem;
+                width: calc(50% - 2rem);
+                text-align: left;
+                font-weight: 600;
+                color: #4b5563;
+            }
+        }
+
+        /* Estilos para el modal de imagen */
+        .modal {
+            display: none; /* Oculto por defecto */
+            position: fixed; /* Posición fija en la pantalla */
+            z-index: 1000; /* Por encima de otros elementos */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Permite scroll si la imagen es muy grande */
+            background-color: rgba(0,0,0,0.8); /* Fondo oscuro semitransparente */
+            align-items: center; /* Centra verticalmente */
+            justify-content: center; /* Centra horizontalmente */
+            backdrop-filter: blur(5px); /* Efecto de desenfoque en el fondo */
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%; /* Ancho máximo del 90% de la pantalla */
+            max-height: 90%; /* Altura máxima del 90% de la pantalla */
+            border-radius: 0.75rem; /* Bordes redondeados */
+            box-shadow: 0 10px 15px rgba(0,0,0,0.3); /* Sombra más pronunciada */
+        }
+
+        .modal-caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+        }
+
+        /* Botón de cerrar (X) */
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8">
+    <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <header class="bg-red-700 p-6 text-white text-center rounded-t-xl">
+            <h1 class="text-3xl sm:text-4xl font-bold mb-2 flex items-center justify-center gap-2">
+                Nuestro Catálogo ⚡️
+            </h1>
+            <p class="text-lg sm:text-xl font-light">Teacher Deivid y Hebe, entusiastas de sonido</p>
+        </header>
+
+        <main class="p-6 space-y-12">
+
+            <!-- Sección de Amplificadores -->
+            <section id="amplificadores">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center sm:text-left">Amplificadores Integrados</h2>
+                <div class="overflow-x-auto rounded-lg shadow-md">
+                    <table class="responsive-table min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th>Modelo</th>
+                                <th>Imagen</th>
+                                <th>Precio</th>
+                                <th>Tiendas</th>
+                                <th>Época Descuentos</th>
+                                <th>Características</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Amplificador: Elektrocompaniet eci6 dx mkii -->
+                            <tr>
+                                <td data-label="Modelo">Elektrocompaniet ECI6 DX MKII</td>
+                                <td data-label="Imagen">
+                                    <img src="https://www.sarte-audio.com/sites/default/files/styles/max_2600x2600/public/blog/imagenes/destacadas/electrocompaniet_eci6_dx_mkii.low_.jpg?itok=OJUaWtqZ" 
+                                         alt="Elektrocompaniet ECI6 DX MKII" 
+                                         class="table-img"
+                                         onerror="this.onerror=null;this.src='https://placehold.co/100x100/e5e7eb/6b7280?text=Imagen+no+disponible';">
+                                </td>
+                                <td data-label="Precio">€8.500</td>
+                                <td data_label="Tiendas">SuperSonido</td>
+                                <td data_label="Época Descuentos">Black Friday</td>
+                                <td data_label="Características">Amplificador integrado, DAC, Streamer.</td>
+                            </tr>
+                            <!-- Amplificador: Luxman L509 X -->
+                            <tr>
+                                <td data-label="Modelo">Luxman L509 X</td>
+                                <td data_label="Imagen">
+                                    <img src="https://lafargayherranz.com/wp-content/uploads/2018/04/LUXMAN-L-509X.jpg" 
+                                         alt="Luxman L509 X" 
+                                         class="table-img"
+                                         onerror="this.onerror=null;this.src='https://placehold.co/100x100/e5e7eb/6b7280?text=Imagen+no+disponible';">
+                                </td>
+                                <td data_label="Precio">€11.000</td>
+                                <td data_label="Tiendas">LaFarga y Herranz</td>
+                                <td data_label="Época Descuentos">Black Friday</td>
+                                <td data_label="Características">Amplificador integrado de alta gama.</td>
+                            </tr>
+                            <!-- Amplificador: Mola Mola Kula -->
+                            <tr>
+                                <td data_label="Modelo">Mola Mola Kula</td>
+                                <td data_label="Imagen">
+                                    <img src="https://audiogallery.es/wp-content/uploads/2022/01/Audiogallery-destacada-productos-Mola-Mola-kula.jpg" 
+                                         alt="Mola Mola Kula" 
+                                         class="table-img"
+                                         onerror="this.onerror=null;this.src='https://placehold.co/100x100/e5e7eb/6b7280?text=Imagen+no+disponible';">
+                                </td>
+                                <td data_label="Precio">€11.990</td>
+                                <td data_label="Tiendas">AudioGallery</td>
+                                <td data_label="Época Descuentos">Black Friday</td>
+                                <td data_label="Características">Amplificador integrado.</td>
+                            </tr>
+                            <!-- Amplificador: Krell Industries K300i Digital -->
+                            <tr>
+                                <td data_label="Modelo">Krell Industries K300i Digital</td>
+                                <td data_label="Imagen">
+                                    <img src="https://cdn11.bigcommerce.com/s-9dk28p8567/images/stencil/1600x1600/products/5677/58590/KRK300I_BLK_01-Large__07109.1715964042.jpg?c=1" 
+                                         alt="Krell Industries K300i Digital" 
+                                         class="table-img"
+                                         onerror="this.onerror=null;this.src='https://placehold.co/100x100/e5e7eb/6b7280?text=Imagen+no+disponible';">
+                                </td>
+                                <td data_label="Precio">€12.490</td>
+                                <td data_label="Tiendas">Super Sonido</td>
+                                <td data_label="Época Descuentos">Black Friday</td>
+                                <td data="Características">Amplificador integrado digital.</td>
+                            </tr>
+                            <!-- Amplificador: Gryphon Diablo 120 -->
+                            <tr>
+                                <td data_label="Modelo">Gryphon Diablo 120</td>
+                                <td data_label="Imagen">
+                                    <img src="https://audiogallery.es/wp-content/uploads/2020/07/Audiogallery-destacada-productos-gryphon-diablo-120.jpg" 
+                                         alt="Gryphon Diablo 120" 
+                                         class="table-img"
+                                         onerror="this.onerror=null;this.src='https://placehold.co/100x100/e5e7eb/6b7280?text=Imagen+no+disponible';">
+                                </td>
+                                <td data_label="Precio">€14.400</td>
+                                <td data_label="Tiendas">AudioGallery</td>
+                                <td data_label="Época Descuentos">Black Friday</td>
+                                <td data_label="Características">Amplificador de alta gama.</td>
+                            </tr>
+                            <!-- Amplificador: Accuphase E5000 -->
+                            <tr>
+                                <td data_label="Modelo">Accuphase E5000</td>
+                                <td data_label="Imagen">
+                                    <img src="https://audiogallery.es/wp-content/uploads/2021/12/Audiogallery-destacada-productos-Accuphase-E-5000.jpg" 
+                                         alt="Accuphase E5000" 
+                                         class="table-img"
+                                         onerror="this.onerror=null;this.src='https://placehold.co/100x100/e5e7eb/6b7280?text=Imagen+no+disponible';">
+                                </td>
+                                <td data_label="Precio">€14.900</td>
+                                <td data_label="Tiendas">AudioGallery</td>
+                                <td data_label="Época Descuentos">Black Friday</td>
+                                <td data_label="Características">Amplificador integrado.</td>
+                            </tr>
+                            <!-- Copia y pega más filas <tr>...</tr> para añadir más amplificadores -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Sección de Cables -->
+            <section id="cables" class="mt-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center sm:text-left">Cables</h2>
+                <div class="overflow-x-auto rounded-lg shadow-md">
+                    <table class="responsive-table min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th>Modelo</th>
+                                <th>Imagen</th>
+                                <th>Precio</th>
+                                <th>Tiendas</th>
+                                <th>Época Descuentos</th>
+                                <th>Características</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Cable: Luna Orange XLR -->
+                            <tr>
+                                <td data_label="Modelo">Luna Orange XLR</td>
+                                <td data_label="Imagen">
+                                    <img src="https://arsantiquaudio.com/wp-content/uploads/2022/04/7924-Luna-Cables-Naranja-XLR.jpg" 
+                                         alt="Luna Orange XLR" 
+                                         class="table-img"
+                                         onerror="this.onerror=null;this.src='https://placehold.co/100x100/e5e7eb/6b7280?text=Imagen+no+disponible';">
+                                </td>
+                                <td data_label="Precio">€990</td>
+                                <td data_label="Tiendas">ArsAntiquaAudio</td>
+                                <td data_label="Época Descuentos">Black Friday</td>
+                                <td data_label="Características">1 metro.</td>
+                            </tr>
+                            <!-- Cable: Luna Orange Red -->
+                            <tr>
+                                <td data_label="Modelo">Luna Orange Red</td>
+                                <td data_label="Imagen">
+                                    <img src="https://arsantiquaudio.com/wp-content/uploads/2022/04/7932-Luna-Cables-Naranja-Power-CA.jpg" 
+                                         alt="Luna Orange Red" 
+                                         class="table-img"
+                                         onerror="this.onerror=null;this.src='https://placehold.co/100x100/e5e7eb/6b7280?text=Imagen+no+disponible';">
+                                </td>
+                                <td data_label="Precio">€2.310</td>
+                                <td data_label="Tiendas">ArsAntiquaAudio</td>
+                                <td data_label="Época Descuentos">Black Friday</td>
+                                <td data_label="Características">1.5 metros.</td>
+                            </tr>
+                            <!-- Cable: Luna Orange Altavoz -->
+                            <tr>
+                                <td data_label="Modelo">Luna Orange Altavoz</td>
+                                <td data_label="Imagen">
+                                    <img src="https://arsantiquaudio.com/wp-content/uploads/2022/04/7917-Luna-Cables-Naranja-Altavoz.jpg" 
+                                         alt="Luna Orange Altavoz" 
+                                         class="table-img"
+                                         onerror="this.onerror=null;this.src='https://placehold.co/100x100/e5e7eb/6b7280?text=Imagen+no+disponible';">
+                                </td>
+                                <td data_label="Precio">€2.970</td>
+                                <td data_label="Tiendas">ArsAntiquaAudio</td>
+                                <td data_label="Época Descuentos">Black Friday</td>
+                                <td data_label="Características">4 metros.</td>
+                            </tr>
+                            <!-- Copia y pega más filas <tr>...</tr> para añadir más cables -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="bg-gray-100 p-6 text-center text-gray-600 text-sm rounded-b-xl mt-8">
+            <p>&copy; 2025 Nuestro Catálogo Personal de Audio.</p>
+        </footer>
+    </div>
+
+    <!-- Modal para mostrar la imagen grande -->
+    <div id="imageModal" class="modal">
+        <span class="close-button">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="caption" class="modal-caption"></div>
+    </div>
+
+    <script>
+        // Obtener el modal
+        var modal = document.getElementById("imageModal");
+
+        // Obtener la imagen dentro del modal y el texto del caption
+        var modalImg = document.getElementById("modalImage");
+        var captionText = document.getElementById("caption");
+
+        // Obtener todas las imágenes de la tabla
+        var images = document.querySelectorAll(".table-img");
+
+        // Recorrer todas las imágenes y añadir un evento click
+        images.forEach(function(img) {
+            img.onclick = function(){
+                modal.style.display = "flex"; // Mostrar el modal (usando flex para centrar)
+                modalImg.src = this.src; // Establecer la fuente de la imagen del modal
+                captionText.innerHTML = this.alt; // Establecer el texto del caption (alt de la imagen)
+            }
+        });
+
+        // Obtener el elemento <span> que cierra el modal
+        var span = document.getElementsByClassName("close-button")[0];
+
+        // Cuando el usuario hace clic en <span> (x), cierra el modal
+        span.onclick = function() { 
+            modal.style.display = "none";
+        }
+
+        // Cuando el usuario hace clic fuera de la imagen en el modal, cierra el modal
+        modal.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
