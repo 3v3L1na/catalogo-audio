@@ -298,4 +298,71 @@
                             <tr>
                                 <td data_label="Modelo">Luna Orange Altavoz</td>
                                 <td data_label="Imagen">
-                                    <img sr
+                                    <img src="https://placehold.co/100x100/8A2BE2/FFFFFF?text=Altavoz" 
+                                         alt="Luna Orange Altavoz" 
+                                         class="table-img"
+                                         onerror="this.onerror=null;this.src='https://placehold.co/100x100/e5e7eb/6b7280?text=Imagen+no+disponible';">
+                                </td>
+                                <td data_label="Precio Mínimo">€2.970</td>
+                                <td data_label="Tiendas">ArsAntiquaAudio</td>
+                                <td data_label="Enlaces">
+                                    <a href="https://arsantiquaudio.com/producto/luna-cables-naranja-altavoz/" target="_blank" class="text-blue-600 hover:underline">Enlace</a>
+                                </td>
+                            </tr>
+                            <!-- Copia y pega más filas <tr>...</tr> para añadir más cables -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="bg-gray-100 p-6 text-center text-gray-600 text-sm rounded-b-xl mt-8">
+            <p>&copy; 2025 Nuestro Catálogo Personal de Audio.</p>
+        </footer>
+    </div>
+
+    <!-- Modal para mostrar la imagen grande -->
+    <div id="imageModal" class="modal">
+        <span class="close-button">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="caption" class="modal-caption"></div>
+    </div>
+
+    <script>
+        // Obtener el modal
+        var modal = document.getElementById("imageModal");
+
+        // Obtener la imagen dentro del modal y el texto del caption
+        var modalImg = document.getElementById("modalImage");
+        var captionText = document.getElementById("caption");
+
+        // Obtener todas las imágenes de la tabla
+        var images = document.querySelectorAll(".table-img");
+
+        // Recorrer todas las imágenes y añadir un evento click
+        images.forEach(function(img) {
+            img.onclick = function(){
+                modal.style.display = "flex"; // Mostrar el modal (usando flex para centrar)
+                modalImg.src = this.src; // Establecer la fuente de la imagen del modal
+                captionText.innerHTML = this.alt; // Establecer el texto del caption (alt de la imagen)
+            }
+        });
+
+        // Obtener el elemento <span> que cierra el modal
+        var span = document.getElementsByClassName("close-button")[0];
+
+        // Cuando el usuario hace clic en <span> (x), cierra el modal
+        span.onclick = function() { 
+            modal.style.display = "none";
+        }
+
+        // Cuando el usuario hace clic fuera de la imagen en el modal, cierra el modal
+        modal.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
