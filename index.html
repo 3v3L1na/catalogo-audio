@@ -128,11 +128,20 @@
 </head>
 <body class="p-4 sm:p-6 md:p-8">
     <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
-        <header class="bg-red-700 p-6 text-white text-center rounded-t-xl">
-            <h1 class="text-3xl sm:text-4xl font-bold mb-2 flex items-center justify-center gap-2">
-                Nuestro Catálogo ⚡️
-            </h1>
-            <p class="text-lg sm:text-xl font-light">Teacher Deivid y Hebe, entusiastas de sonido</p>
+        <header class="bg-red-700 p-0 text-white rounded-t-xl flex items-stretch">
+            <!-- Contenedor de la imagen que ocupa el espacio izquierdo -->
+            <div class="w-1/4 h-auto flex items-center justify-center overflow-hidden rounded-tl-xl">
+                <img src="https://images.mubicdn.net/images/cast_member/1057901/cache-939598-1706082162/image-w856.jpg?size=300x" 
+                     alt="Logo de Catálogo" 
+                     class="w-full h-full object-cover">
+            </div>
+            <!-- Contenedor del texto del encabezado -->
+            <div class="w-3/4 p-6 text-center flex flex-col justify-center">
+                <h1 class="text-3xl sm:text-4xl font-bold mb-2 flex items-center justify-center gap-2">
+                    Nuestro Catálogo ⚡️
+                </h1>
+                <p class="text-lg sm:text-xl font-light">Teacher Deivid y Hebe, entusiastas de sonido</p>
+            </div>
         </header>
 
         <main class="p-6 space-y-12">
@@ -568,6 +577,7 @@
 
         <footer class="bg-gray-100 p-6 text-center text-gray-600 text-sm rounded-b-xl mt-8">
             <p>&copy; 2025 Nuestro Catálogo Personal de Audio.</p>
+            <p>Creado con ❤️ por Teacher Deivid y Hebe.</p>
         </footer>
     </div>
 
